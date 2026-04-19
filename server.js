@@ -30,6 +30,7 @@ if (!fs.existsSync(DATA_DIR)) {
 if (!fs.existsSync(BACKUP_DIR)) {
   fs.mkdirSync(BACKUP_DIR, { recursive: true });
 }
+const db = new Database(path.join(__dirname, 'data', 'votacion.sqlite'));
 
 initDb();
 seedIfEmpty();
