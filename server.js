@@ -20,7 +20,16 @@ const TELEGRAM_CHAT_ID = env.TELEGRAM_CHAT_ID || '';
 const app = express();
 const server = createServer(app);
 const io = new SocketIOServer(server);
-const db = new Database(path.join(__dirname, 'data', 'votacion.sqlite'));
+const DATA_DIR = path.join(__dirname, 'data');
+const BACKUP_DIR = path.join(DATA_DIR, 'backups');
+
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+if (!fs.existsSync(BACKUP_DIR)) {
+  fs.mkdirSync(BACKUP_DIR, { recursive: true });
+}
 
 initDb();
 seedIfEmpty();
